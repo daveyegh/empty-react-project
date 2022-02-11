@@ -1,0 +1,16 @@
+$bodyColor: white;
+
+body {
+    background-color: $bodyColor;
+}
+
+
+.header {
+    .header__inner {
+        .header__something {
+            .header__list {
+                display: flex;
+            }
+        }
+    }
+}
