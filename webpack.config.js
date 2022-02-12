@@ -1,8 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlMinimizerPlugin = require("html-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
-    mode: "development",
+    mode: "production",
+    optimization: {
+        minimize: true,
+        minimizer: [new CssMinimizerPlugin(), new HtmlMinimizerPlugin()]
+    },
     module: {
         rules: [
             // JS Loader
@@ -36,7 +42,7 @@ module.exports = {
             // CSS Loader
             {
                 test: /\.(css)$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader"]
+                use: [MiniCssExtractPlugin.loader, {loader: "css-loader", options: {sourceMap: true}}],
             },
             // SASS/SCSS Loader
             {
@@ -56,5 +62,6 @@ module.exports = {
     ],
     devServer: {
         open: true,
+
     }
 };
